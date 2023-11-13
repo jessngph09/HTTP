@@ -19,4 +19,28 @@ private static HttpClient HTTP_CLIENT = Http.Client.newBuilder()
 .version(HttpClient.Version.HTTP_2)            // uses HTTP protocol version 2 where possible
 .followRedirects(HttpClient.Redirect.NORMAL)   // always redirects, except from HTTPS to HTTP
 .build();
-  ```
+ ```
+
+```java
+public static void main (String[] args) {
+
+URI resource = URI.create("http://computing.uga.edu");
+HttpRequest request = HttpRequest.newBuilder()
+.uri(resource)
+.build();
+
+String s = "aaaa" + "bbbb"; // "+" operator connect the statement together in different lines
+try {
+
+    BodyHandler<String> bodyHandler = BodyHandlers.ofString();
+    HttpResponse<String> response = HTTP_CLIENT.<String>send(request, bodyHandler);
+    int code = response.statusCode();
+    System.out.println(code); //200  means OK
+
+} catch (IOExceptionInterruptedException cause) {
+        System.err.println(cause);
+        cause.printStackTrace();
+
+    } //try
+} //main
+```
