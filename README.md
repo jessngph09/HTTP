@@ -38,7 +38,9 @@ try {
     if (code != 200) {
         throw new IOException("HTTP" + code);
     } //if
+    String body = response.body();
     System.out.println(code); //200  means OK
+    System.out.println(body);
 } catch (IOExceptionInterruptedException cause) {
         System.err.println(cause);
         cause.printStackTrace();
