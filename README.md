@@ -35,8 +35,10 @@ try {
     BodyHandler<String> bodyHandler = BodyHandlers.ofString();
     HttpResponse<String> response = HTTP_CLIENT.<String>send(request, bodyHandler);
     int code = response.statusCode();
+    if (code != 200) {
+        throw new IOException("HTTP" + code);
+    } //if
     System.out.println(code); //200  means OK
-
 } catch (IOExceptionInterruptedException cause) {
         System.err.println(cause);
         cause.printStackTrace();
@@ -44,3 +46,5 @@ try {
     } //try
 } //main
 ```
+
+If the code compiles and runs, the result should be "200" but if it's "404", that means it's not OK.
